@@ -131,3 +131,11 @@ def reduce_temp(request,kong_id):
 def reduce_temp_text(request):
     a = request.GET['a']
     print(a)
+
+# def closeLight(request):
+#     try:
+#         ser = serial.Serial("/dev/ttyAMA0",9600)
+#         ser.write("close light")
+#     except :
+#         return HttpResponse(u"faile")
+#     return HttpResponse(u"happy333happy")
