@@ -127,3 +127,7 @@ def reduce_temp(request,kong_id):
         kong_set = h.kongtiao.all()
 
     return render(request, 'index.html', locals())
+
+def reduce_temp_text(request):
+    a = request.GET['a']
+    print(a)

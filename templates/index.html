@@ -73,6 +73,18 @@
                                     <td>{{ foo.temperature }}</td>
                                     <td><a href="/reduce_temp/{{ foo.id }}">降温</a></td>
                                     <td><a href="/raise_temp/{{ foo.id }}">升温</a></td>
+                                    <button type="button" id='sum'>提交</button>
+                                     <script>
+                                        $(document).ready(function(){
+                                          $("#sum").click(function(){
+                                            var a = {{ foo.id }}
+
+                                            $.get("/ajx_text/",{'a':a}, function(ret){
+                                                $('#result').html(ret)
+                                            })
+                                          });
+                                        });
+                                    </script>
                                 </tr>
 							{% endfor %}
                             </table>
@@ -90,8 +102,9 @@
 				<!--end-footer-section-->
 			</div>
 		</div>
+    </div>
 
-        </div></div>
+
 </body>
 </html> 
 {% endblock %}
