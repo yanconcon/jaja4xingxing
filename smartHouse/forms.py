@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
 from django.utils.translation import ugettext, ugettext_lazy as _
-from smartHouse.models import house
+from smartHouse.models import house,houseUser,login
 
 import re
 
@@ -98,6 +98,42 @@ class SignupForm (forms.ModelForm):
 		if not(h.passCode == int(passCode)):
 			raise forms.ValidationError("房子ID或密钥错误")
 		return houseId
+
+
+class LoginForm(forms.ModelForm):
+	username = forms.CharField(
+		label='用户名', required=True,
+		error_messages={'required': '请填写你的用户名', 'max_length': '最多只能输入15个字符', 'min_length': '至少输入3个字符'}, max_length=15,
+		min_length=3, widget=forms.TextInput(attrs={'placeholder': '3~15位字母/数字/汉字'}))
+	password = forms.CharField(
+		error_messages={'required': '请输入密码', 'max_length': '最多只能输入20个字符', 'min_length': '至少输入6个字符'},
+		label='密码', required=True, max_length=20, widget=forms.PasswordInput(attrs={'placeholder': '长度在6~20个字符以内'}))
+
+
+	class Meta:
+		model = login
+		fields = ("username","password")
+
+	def clean_username(self):
+		UserModel = get_user_model()
+		u_name = self.cleaned_data["username"]
+		n = re.sub('[^\u4e00-\u9fa5a-zA-Z]','',u_name)
+
+		mgc = ['admin','user']
+
+		if n in mgc:
+			raise forms.ValidationError("这不是你的用户名，换一个试试吧")
+
+		try:
+			u = UserModel._default_manager.get(username = u_name)
+		except UserModel.DoesNotExist:
+			raise forms.ValidationError("用户账号或密码错误")
+		return u_name
+
+
+	def clean_password(self):
+		password = self.cleaned_data["password"]
+		return password
 
 
 

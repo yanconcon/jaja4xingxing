@@ -22,8 +22,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name="admin"),
     url(r'^$', views.home, name="home"),
-    url(r'^about/', views.about),
-    url(r'^signup/', views.signup),
-    url(r'^logout/', views.logout_view),
+    url(r'^about/$', views.about),
+    url(r'^signup/$', views.signup),
+    url(r'^logout/$', views.logout_view),
+    url(r'^login/$',views.login,name="login"),
+    url(r'^closelight/(\d+)/$',views.turnLight),
+    url(r'^reduce_temp/(\d+)/$',views.reduce_temp),
+    url(r'^raise_temp/(\d+)/$',views.raise_temp),
 ]
               #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
