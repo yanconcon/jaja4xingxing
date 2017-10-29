@@ -34,7 +34,7 @@ class SignupForm (forms.ModelForm):
 	confirm_password= forms.CharField(error_messages={'required': '请输入密码','max_length':'最多只能输入20个字符','min_length':'至少输入6个字符'},
 		label='确认密码',required=True,max_length=20,min_length=6,widget = forms.PasswordInput(attrs={'placeholder':'长度在6~20个字符以内'}))
 	birthday = forms.DateField(
-		label='生日',required=True,error_messages={'required':'生日格式YYYY-MM-DD','invalid':'日期格式不正确'},widget=forms.DateInput(attrs={'placeholder':'生日格式YYYY-MM-DD'}))
+		label='生日',required=True,error_messages={'required':'生日格式:YYYY-MM-DD','invalid':'日期格式不正确'},widget=forms.DateInput(attrs={'placeholder':'生日格式 : YYYY-MM-DD'}))
 	houseId = forms.IntegerField(
 		label='房子ID',required=True,error_messages={'required':'请输入房子ID号'},widget=forms.NumberInput(attrs={'placeholder':'请输入正确的房子ID'}))
 	houseCode = forms.IntegerField(

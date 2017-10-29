@@ -7,12 +7,21 @@
 				<div class="header">
 					<div class="head-top">
 						<div class="top-menu">
-						<span class="menu"><img src="images/nav.png" alt=""/> </span>
+						<span class="menu"><img src="/static/images/nav.png" alt=""/> </span>
 							<ul>
-								<li><a href="/"><span>Home</span></a></li>
-                                <li><a href="login"><span>登录</span></a> </li>
-							    <li><a href="signup"><span>注册</span></a></li>
-								<li><a href="logout"><span>退出</span></a></li>
+
+								{% if  request.user.id %}
+                                    <li><a href="/"><span>Home</span></a></li>
+                                    <li class="active"><a href="/about"><span>About us</span></a></li>
+								    <li><span>你好:{{user.username}}</span></li>
+                                     <li><a href="/logout"><span>退出</span></a></li>
+                                    {% else %}
+                                    <li><a href="/"><span>Home</span></a></li>
+                                    <li class="active"><a href="/about"><span>About us</span></a></li>
+                                    <li><a href="/login"><span>登录</span></a> </li>
+                                    <li><a href="/signup"><span>注册</span></a></li>
+                                    <li><a href="/logout"><span>退出</span></a></li>
+								{%  endif %}
 							</ul>
 						</div>
 						<div class="social-icons">
@@ -33,17 +42,16 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="logo">
-							<h1><a href="index.html"><span>i</span>nland</a></h1>
+							<h1><a href="/about/"><span>jj4</span>xingxing</a></h1>
 					</div>
 				</div>
 				<div class="header-banner">
-			<h2>about us</h2>
-
-					<div class="footer-top">
-						<p>Copyright &copy; 2015.Company name All rights reserved.More Templates </p>
-					</div>
+			        <h2>about us</h2>
 				</div>
 	<!--end-footer-section-->
+            <div class="footer-top">
+						<p>Copyright &copy; 2015.Company By学生科技协会技术团</p>
+					</div>
 			</div>
 		</div>
 	</div>

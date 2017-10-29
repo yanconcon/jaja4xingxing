@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^closelight/(\d+)/$',views.turnLight),
     url(r'^reduce_temp/(\d+)/$',views.reduce_temp),
     url(r'^raise_temp/(\d+)/$',views.raise_temp),
+    # text:
     url(r'^ajx_text/$',views.reduce_temp_text),
 ]
               #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

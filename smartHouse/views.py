@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from smartHouse.forms import SignupForm,LoginForm
 from django.contrib.auth import get_user_model
 from smartHouse.models import house,light as Light,kongtiao as KongTiao
+from smartHouse.raspb_ser_con import turn_light,raise_temp,redu_temp
 
 
 # Create your views here.
@@ -83,6 +84,9 @@ def turnLight(request,light_id):
     s = not l.state
     l.state = s
     l.save()
+    str = 'turnlight'+light_id
+    print(str)
+    turn_light(light_id)
 
     time = datetime.datetime.now()
 
@@ -103,6 +107,9 @@ def raise_temp(request,kong_id):
     kong.temperature = kong.temperature+1
     # 保存
     kong.save()
+    str = 'raise' + kong_id
+    print("raise")
+    # raise_temp(kong_id)
 
     time = datetime.datetime.now()
     if request.user.id:
@@ -118,6 +125,9 @@ def reduce_temp(request,kong_id):
     kong = KongTiao.objects.get(id = kong_id)
     kong.temperature = kong.temperature-1
     kong.save()
+    str = 'reduce'+kong_id
+    print(str)
+    # redu_temp(kong_id)
 
     time = datetime.datetime.now()
     if request.user.id:
@@ -131,8 +141,17 @@ def reduce_temp(request,kong_id):
 def reduce_temp_text(request):
     a = request.GET['a']
     print(a)
+    return HttpResponse("aaaaaaaaaa")
 
-# def closeLight(request):
+# def closeLight():
+#     try:
+#         ser = serial.Serial("/dev/ttyAMA0",9600)
+#         ser.write("close light")
+#     except :
+#         return HttpResponse(u"faile")
+#     return HttpResponse(u"happy333happy")
+
+# def closeLight():
 #     try:
 #         ser = serial.Serial("/dev/ttyAMA0",9600)
 #         ser.write("close light")
