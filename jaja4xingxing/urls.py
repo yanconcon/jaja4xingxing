@@ -31,5 +31,6 @@ urlpatterns = [
     url(r'^raise_temp/(\d+)/$',views.raise_temp),
     # text:
     url(r'^ajx_text/$',views.reduce_temp_text),
+    url(r'^json/$',views.json),
 ]
               #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

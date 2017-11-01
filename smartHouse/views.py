@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from django.template import RequestContext
-import datetime
+import datetime,json
 from django.contrib.auth import authenticate, login as auth_login, logout
 from smartHouse.forms import SignupForm,LoginForm
 from django.contrib.auth import get_user_model
@@ -143,18 +143,6 @@ def reduce_temp_text(request):
     print(a)
     return HttpResponse("aaaaaaaaaa")
 
-# def closeLight():
-#     try:
-#         ser = serial.Serial("/dev/ttyAMA0",9600)
-#         ser.write("close light")
-#     except :
-#         return HttpResponse(u"faile")
-#     return HttpResponse(u"happy333happy")
-
-# def closeLight():
-#     try:
-#         ser = serial.Serial("/dev/ttyAMA0",9600)
-#         ser.write("close light")
-#     except :
-#         return HttpResponse(u"faile")
-#     return HttpResponse(u"happy333happy")
+def json(request):
+    name_dict = {'twz': 'Love python and Django', 'zqxt': 'I am teaching Django'}
+    return JsonResponse(name_dict)
